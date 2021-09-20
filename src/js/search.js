@@ -15,11 +15,15 @@ function onSearch(e) {
 
   pixabayApiService.query = e.currentTarget.elements.query.value;
   pixabayApiService.resetPage();
-  pixabayApiService.fetchImgCards();
+  pixabayApiService.fetchImgCards().then(appendCardsMarkup);
 }
 
 function onLoadMore() {
-  pixabayApiService.fetchImgCards();
+  pixabayApiService.fetchImgCards().then(appendCardsMarkup);
+}
+
+function appendCardsMarkup(hits) {
+  galleryRef.insertAdjacentHTML('beforeend', gallery(hits));
 }
 
 // const infScroll = new InfiniteScroll('.gallery', {
