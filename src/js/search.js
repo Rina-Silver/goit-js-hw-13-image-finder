@@ -1,6 +1,26 @@
+import refs from './refs';
+import NewApiService from './apiService';
 import gallery from '../templates/photo-card.hbs';
-import './apiService.js';
+
 import InfiniteScroll from 'infinite-scroll';
+
+const { searchForm, btnSearch, galleryRef, btnLoad } = refs;
+const pixabayApiService = new NewApiService();
+
+searchForm.addEventListener('submit', onSearch);
+btnLoad.addEventListener('click', onLoadMore);
+
+function onSearch(e) {
+  e.preventDefault();
+
+  pixabayApiService.query = e.currentTarget.elements.query.value;
+  pixabayApiService.resetPage();
+  pixabayApiService.fetchImgCards();
+}
+
+function onLoadMore() {
+  pixabayApiService.fetchImgCards();
+}
 
 // const infScroll = new InfiniteScroll('.gallery', {
 //   // options
@@ -9,11 +29,3 @@ import InfiniteScroll from 'infinite-scroll';
 //     return `/articles/P${pageNumber}`;
 //   },
 // });
-
-const BASE_URL = 'https://pixabay.com/api/?image_type=photo&orientation=horizontal';
-const API_KEY = '23479775-7c8a7e565023089f3ce2cecd2';
-let page = 1;
-
-fetch(`${BASE_URL}&q=cat&page=${page}&per_page=12&key=${API_KEY}`)
-  .then(res => res.json())
-  .then(data => console.log(data.hits));
