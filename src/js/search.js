@@ -22,6 +22,7 @@ function onSearch(e) {
   e.preventDefault();
 
   pixabayApiService.query = e.currentTarget.elements.query.value;
+  clearCardsContainer();
   if (pixabayApiService.query.length === 0) {
     btnLoad.classList.add('is-hidden');
     alert({
@@ -36,7 +37,7 @@ function onSearch(e) {
   pixabayApiService
     .fetchImgCards()
     .then(hits => {
-      clearCardsContainer();
+      //clearCardsContainer();
 
       if (hits.length === 0) {
         error({
