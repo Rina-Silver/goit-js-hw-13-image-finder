@@ -11,9 +11,9 @@ export default class NewApiService {
 
     return fetch(`${BASE_URL}&q=${this.searchQuery}&page=${this.page}&per_page=12&key=${API_KEY}`)
       .then(res => res.json())
-      .then(data => {
+      .then(({ hits }) => {
         this.incrementPage();
-        return data.hits;
+        return hits;
       });
   }
 
