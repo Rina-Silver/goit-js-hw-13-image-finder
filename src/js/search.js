@@ -5,7 +5,7 @@ import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 
 import '@pnotify/core/dist/BrightTheme.css';
-
+import '@pnotify/core/dist/PNotify.css';
 import { alert, notice, info, success, error } from '@pnotify/core';
 
 import InfiniteScroll from 'infinite-scroll';
@@ -46,6 +46,8 @@ function onSearch(e) {
           width: '500px',
           sticker: false,
         });
+        btnLoad.classList.add('is-hidden');
+        return;
       } else appendCardsMarkup(hits);
       btnLoad.classList.remove('is-hidden');
     })
