@@ -2,6 +2,7 @@ import refs from './refs';
 import NewApiService from './apiService';
 import gallery from '../templates/photo-card.hbs';
 import * as basicLightbox from 'basiclightbox';
+import 'basiclightbox/dist/basicLightbox.min.css';
 
 import InfiniteScroll from 'infinite-scroll';
 
@@ -12,11 +13,10 @@ const pixabayApiService = new NewApiService();
 searchForm.addEventListener('submit', onSearch);
 btnLoad.addEventListener('click', onLoadMore);
 galleryRef.addEventListener('click', e => {
-  console.log(e.target.dataset.src);
-
   if (e.target.nodeName !== 'IMG') {
     return;
   }
+
   e.preventDefault();
   basicLightbox.create(`<img width="1400" height="900" src="${e.target.dataset.src}">`).show();
 });
